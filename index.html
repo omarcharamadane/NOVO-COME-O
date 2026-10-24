@@ -2,150 +2,567 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#073b32">
-<meta name="description" content="Novo Começo: educação, prevenção e apoio para quem deseja recuperar o controlo sobre as apostas.">
-<title>Novo Começo | Recuperar vidas</title>
-<style>
-:root{--green:#073b32;--mint:#b9f4d5;--gold:#f4c66a;--light:#f5f8f5;--text:#18332d}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--light);color:var(--text);line-height:1.7}
-header{background:var(--green);color:white;padding:18px 6%;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.brand{font-size:21px;font-weight:900;letter-spacing:1px}
-.brand span{color:var(--gold)}
-nav{display:flex;gap:15px;flex-wrap:wrap}
-nav a{color:white;text-decoration:none;font-size:14px}
-.hero{background:linear-gradient(135deg,#073b32,#126b53);color:white;padding:65px 7% 70px}
-.hero small{color:var(--mint);font-weight:bold;letter-spacing:2px}
-h1{font-size:clamp(36px,8vw,58px);line-height:1.12;margin:18px 0}
-.hero p{font-size:18px;max-width:600px;color:#e0eee8}
-.btn{display:inline-block;padding:13px 20px;border-radius:9px;text-decoration:none;font-weight:bold;margin:10px 8px 0 0}
-.btn-gold{background:var(--gold);color:#18332d}
-.btn-light{border:1px solid #c5e6d8;color:white}
-main{max-width:1000px;margin:auto;padding:20px}
-section{padding:34px 0}
-h2{font-size:28px;line-height:1.25;color:var(--green)}
-.intro{font-size:17px;color:#536760}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-.card{background:white;border:1px solid #e0e9e2;border-radius:15px;padding:22px;box-shadow:0 5px 18px #173c3010}
-.card .symbol{font-size:28px}
-.card h3{color:var(--green);margin-bottom:8px}
-.steps{counter-reset:step}
-.step{background:white;margin:12px 0;padding:16px;border-radius:10px;border-left:4px solid #42a77b}
-.notice{background:#fff4d8;padding:18px;border-radius:12px;border:1px solid #f0d69b}
-.question{background:white;padding:16px;margin:12px 0;border-radius:10px}
-.question label{display:block;font-weight:bold;margin-bottom:8px}
-select{padding:10px;border:1px solid #bbc9c0;border-radius:8px;max-width:100%;background:white}
-button{background:var(--green);color:white;border:0;padding:13px 18px;border-radius:8px;font-weight:bold;font-size:15px}
-#resultado{margin-top:18px;padding:16px;border-radius:10px;background:#e2f5e9;display:none}
-footer{background:#062c26;color:#e4eee9;padding:30px 7%;text-align:center}
-footer p{margin:6px}
-a:focus,button:focus,select:focus{outline:3px solid var(--gold);outline-offset:3px}
-@media(max-width:480px){header{padding:16px 5%}.hero{padding:45px 6%}main{padding:16px}nav{gap:10px}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#073f34">
+  <meta name="description" content="Novo Começo: educação, prevenção e apoio social para pessoas afetadas pelas apostas.">
+  <title>Novo Começo | Recuperar vidas</title>
+
+  <style>
+    :root {
+      --verde: #073f34;
+      --verde2: #0b5948;
+      --dourado: #f3c76a;
+      --fundo: #f5f8f6;
+      --texto: #19342d;
+      --branco: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--texto);
+      background: var(--fundo);
+      line-height: 1.7;
+    }
+
+    button, a { font: inherit; }
+    button { cursor: pointer; }
+
+    .topo {
+      background: var(--verde);
+      color: white;
+      padding: 22px 6%;
+    }
+
+    .barra {
+      max-width: 1150px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .marca {
+      color: white;
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .marca span { color: var(--dourado); }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: #e8f5ef;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    nav a:hover { color: var(--dourado); }
+
+    .pagina {
+      display: none;
+      min-height: 70vh;
+      animation: aparecer .35s ease;
+    }
+
+    .pagina.ativa { display: block; }
+
+    @keyframes aparecer {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--verde), #0b6651);
+      color: white;
+      padding: 75px 6% 80px;
+    }
+
+    .hero-conteudo {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .etiqueta {
+      color: #baf0d6;
+      font-weight: bold;
+      letter-spacing: 2px;
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(36px, 6vw, 65px);
+      line-height: 1.13;
+      margin: 20px 0;
+      max-width: 780px;
+    }
+
+    .hero p {
+      color: #dcece5;
+      max-width: 690px;
+      font-size: 18px;
+      margin-bottom: 28px;
+    }
+
+    .botao {
+      border: 0;
+      border-radius: 12px;
+      padding: 14px 20px;
+      font-weight: bold;
+      display: inline-block;
+      text-decoration: none;
+      transition: .2s;
+    }
+
+    .botao:hover { transform: translateY(-2px); }
+
+    .dourado {
+      background: var(--dourado);
+      color: #17382e;
+    }
+
+    .contorno {
+      background: transparent;
+      color: white;
+      border: 1px solid #b9d9ce;
+      margin-left: 8px;
+    }
+
+    .secao {
+      max-width: 1100px;
+      margin: auto;
+      padding: 55px 6%;
+    }
+
+    .centro { text-align: center; }
+
+    h2 {
+      font-size: clamp(26px, 4vw, 38px);
+      line-height: 1.25;
+      margin-bottom: 14px;
+    }
+
+    .introducao {
+      color: #5c7069;
+      max-width: 700px;
+      margin: 0 auto 30px;
+    }
+
+    .cartoes {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .cartao {
+      background: white;
+      border: 1px solid #e1e9e4;
+      border-radius: 18px;
+      padding: 26px;
+      box-shadow: 0 5px 18px #123b2b0b;
+    }
+
+    .icone {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: #e3f3e9;
+      font-size: 25px;
+      margin-bottom: 16px;
+    }
+
+    .cartao h3 { font-size: 20px; margin-bottom: 8px; }
+
+    .cartao p {
+      color: #60716a;
+      margin-bottom: 18px;
+    }
+
+    .link-botao {
+      background: none;
+      border: none;
+      color: #087457;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    .faixa {
+      background: #e8f2ec;
+      padding: 35px 6%;
+      text-align: center;
+    }
+
+    .conteudo-pagina {
+      max-width: 850px;
+      margin: auto;
+      padding: 45px 6% 65px;
+    }
+
+    .conteudo-pagina .cartao { margin: 22px 0; }
+
+    .conteudo-pagina h1 {
+      color: var(--verde);
+      font-size: clamp(32px, 5vw, 48px);
+    }
+
+    .conteudo-pagina h2 {
+      font-size: 24px;
+      margin-top: 28px;
+    }
+
+    .conteudo-pagina p,
+    .conteudo-pagina li { color: #53675f; }
+
+    .conteudo-pagina ul,
+    .conteudo-pagina ol { padding-left: 24px; margin: 12px 0; }
+
+    .aviso {
+      background: #fff4d9;
+      border-left: 4px solid #e5b44f;
+      padding: 17px;
+      border-radius: 8px;
+      margin: 22px 0;
+    }
+
+    .voltar {
+      border: 1px solid #cbdad2;
+      background: white;
+      color: var(--verde);
+      border-radius: 10px;
+      padding: 11px 16px;
+      margin-bottom: 22px;
+      font-weight: bold;
+    }
+
+    .rodape {
+      background: #052f28;
+      color: #dcece5;
+      text-align: center;
+      padding: 30px 6%;
+    }
+
+    .rodape p { font-size: 14px; margin: 5px 0; }
+
+    .rodape .marca { margin-bottom: 8px; }
+
+    @media (max-width: 650px) {
+      .topo { padding: 18px 5%; }
+      .barra { align-items: flex-start; }
+      nav { gap: 12px; }
+      .hero { padding: 55px 6%; }
+      .hero p { font-size: 16px; }
+      .cartoes { grid-template-columns: 1fr; }
+      .contorno { margin: 10px 0 0; }
+      .secao { padding: 42px 6%; }
+    }
+  </style>
 </head>
+
 <body>
-<header>
-  <div class="brand">NOVO <span>COMEÇO</span> 🌱</div>
-  <nav>
-    <a href="#sobre">Sobre</a>
-    <a href="#aprender">Aprender</a>
-    <a href="#passos">Primeiros passos</a>
-    <a href="#familia">Família</a>
-  </nav>
-</header>
+  <header class="topo">
+    <div class="barra">
+      <div class="marca">NOVO <span>COMEÇO</span> 🌱</div>
+      <nav>
+        <a href="#inicio" onclick="mostrar('inicio')">Início</a>
+        <a href="#projeto" onclick="mostrar('projeto')">O projeto</a>
+        <a href="#riscos" onclick="mostrar('riscos')">Aprender</a>
+      </nav>
+    </div>
+  </header>
 
-<div class="hero">
-  <small>EDUCAÇÃO · PREVENÇÃO · ESPERANÇA</small>
-  <h1>Recuperar vidas.<br>Reconstruir futuros.</h1>
-  <p>Perder dinheiro nas apostas não define quem tu és. É possível parar, proteger o que ainda tens e começar a construir um novo caminho.</p>
-  <a class="btn btn-gold" href="#passos">Quero dar o primeiro passo</a>
-  <a class="btn btn-light" href="#sobre">Conhecer o projeto</a>
-</div>
+  <main>
+    <!-- ETAPA 1: PÁGINA INICIAL -->
+    <section id="inicio" class="pagina ativa">
+      <div class="hero">
+        <div class="hero-conteudo">
+          <div class="etiqueta">Educação · Prevenção · Esperança</div>
+          <h1>Recuperar vidas. Reconstruir futuros.</h1>
+          <p>
+            Perder dinheiro nas apostas não define quem tu és.
+            Podes começar a proteger o que ainda tens e construir
+            um novo caminho, um passo de cada vez.
+          </p>
+          <button class="botao dourado" onclick="mostrar('opcoes')">
+            Encontrar orientação →
+          </button>
+          <button class="botao contorno" onclick="mostrar('projeto')">
+            Conhecer o projeto
+          </button>
+        </div>
+      </div>
 
-<main>
-<section id="sobre">
-  <h2>Um novo começo é possível</h2>
-  <p class="intro">O Novo Começo é uma iniciativa em desenvolvimento, criada para promover a educação, a prevenção e a orientação de pessoas afetadas pelas apostas e pelo jogo de azar, começando por Nampula, Moçambique.</p>
-  <div class="grid">
-    <article class="card"><div class="symbol">📘</div><h3>Educação</h3><p>Compreender os riscos das apostas e como elas podem afetar o dinheiro, as relações e o bem-estar.</p></article>
-    <article class="card"><div class="symbol">🤝</div><h3>Acolhimento</h3><p>Reconhecer as dificuldades sem humilhação, julgamento ou falsas promessas.</p></article>
-    <article class="card"><div class="symbol">🌱</div><h3>Reconstrução</h3><p>Dar pequenos passos para proteger o dinheiro, reorganizar a vida e procurar apoio adequado.</p></article>
-  </div>
-</section>
+      <div class="secao">
+        <div class="centro">
+          <h2>Como podemos ajudar-te?</h2>
+          <p class="introducao">
+            Escolhe a opção que corresponde à tua situação.
+            Vais encontrar informações específicas para o próximo passo.
+          </p>
+        </div>
 
-<section id="aprender">
-  <h2>O que precisas de saber</h2>
-  <div class="grid">
-    <article class="card"><h3>Não persigas as perdas</h3><p>Tentar recuperar dinheiro apostando novamente pode aumentar as perdas. Parar agora pode evitar mais prejuízos.</p></article>
-    <article class="card"><h3>Protege o teu dinheiro</h3><p>Se possível, separa o dinheiro destinado à alimentação, renda, transporte e família. Evita empréstimos para apostar.</p></article>
-    <article class="card"><h3>Procura companhia segura</h3><p>Fala com alguém de confiança e procura um profissional de saúde se sentires que perdeste o controlo.</p></article>
-  </div>
-</section>
+        <div class="cartoes">
+          <article class="cartao">
+            <div class="icone">🌱</div>
+            <h3>Quero parar de apostar</h3>
+            <p>Descobre medidas práticas para começares a recuperar o controlo.</p>
+            <button class="link-botao" onclick="mostrar('parar')">
+              Quero começar →
+            </button>
+          </article>
 
-<section id="passos">
-  <h2>Os primeiros passos</h2>
-  <div class="step"><strong>1. Faz uma pausa.</strong> Evita novas apostas e desativa notificações e promoções de jogos.</div>
-  <div class="step"><strong>2. Reduz o acesso.</strong> Se conseguires, bloqueia aplicações e sites de apostas e limita o acesso ao dinheiro reservado para necessidades essenciais.</div>
-  <div class="step"><strong>3. Conta a alguém.</strong> Escolhe uma pessoa de confiança que possa apoiar-te sem te humilhar.</div>
-  <div class="step"><strong>4. Organiza as finanças.</strong> Anota dívidas e despesas essenciais. Não precisas de recuperar tudo de uma vez.</div>
-  <div class="step"><strong>5. Procura ajuda.</strong> Contacta um serviço de saúde local para orientação profissional, sobretudo se não conseguires parar sozinho.</div>
-  <div class="notice"><strong>Lembra-te:</strong> ter perdido dinheiro não significa que perdeste o teu valor. Não precisas de resolver tudo sozinho.</div>
-</section>
+          <article class="cartao">
+            <div class="icone">🤝</div>
+            <h3>Quero ajudar alguém</h3>
+            <p>Aprende como apoiar um familiar ou amigo sem o humilhar.</p>
+            <button class="link-botao" onclick="mostrar('familia')">
+              Saber como ajudar →
+            </button>
+          </article>
 
-<section id="reflexao">
-  <h2>Um momento de reflexão</h2>
-  <p>Estas perguntas ajudam-te a refletir sobre os teus hábitos. Não são um diagnóstico e as respostas não são enviadas nem guardadas por este site.</p>
-  <form id="reflexaoForm">
-    <div class="question"><label for="q1">1. Já apostaste dinheiro destinado a necessidades essenciais?</label><select id="q1" required><option value="">Escolhe uma resposta</option><option value="sim">Sim</option><option value="nao">Não</option></select></div>
-    <div class="question"><label for="q2">2. Já tentaste recuperar perdas apostando novamente?</label><select id="q2" required><option value="">Escolhe uma resposta</option><option value="sim">Sim</option><option value="nao">Não</option></select></div>
-    <div class="question"><label for="q3">3. Já escondeste de alguém quanto gastaste nas apostas?</label><select id="q3" required><option value="">Escolhe uma resposta</option><option value="sim">Sim</option><option value="nao">Não</option></select></div>
-    <div class="question"><label for="q4">4. Já sentiste que não consegues parar de apostar?</label><select id="q4" required><option value="">Escolhe uma resposta</option><option value="sim">Sim</option><option value="nao">Não</option></select></div>
-    <div class="question"><label for="q5">5. As apostas já prejudicaram as tuas relações, o trabalho ou os estudos?</label><select id="q5" required><option value="">Escolhe uma resposta</option><option value="sim">Sim</option><option value="nao">Não</option></select></div>
-    <button type="submit">Ver orientação</button>
-  </form>
-  <div id="resultado" role="status" aria-live="polite"></div>
-</section>
+          <article class="cartao">
+            <div class="icone">📘</div>
+            <h3>Quero aprender sobre os riscos</h3>
+            <p>Compreende os riscos das apostas e os sinais de alerta.</p>
+            <button class="link-botao" onclick="mostrar('riscos')">
+              Aprender agora →
+            </button>
+          </article>
 
-<section id="familia">
-  <h2>Como ajudar alguém próximo</h2>
-  <div class="card">
-    <p>Escuta sem insultar nem envergonhar. Fala com calma sobre os efeitos das apostas e incentiva a pessoa a procurar apoio profissional.</p>
-    <p>Não precisas de pagar todas as dívidas da pessoa nem de lhe entregar dinheiro para recuperar perdas. Protege também o teu próprio bem-estar.</p>
-  </div>
-</section>
+          <article class="cartao">
+            <div class="icone">🌍</div>
+            <h3>Quero conhecer o projeto</h3>
+            <p>Conhece a missão, a visão e os objetivos do Novo Começo.</p>
+            <button class="link-botao" onclick="mostrar('projeto')">
+              Conhecer o projeto →
+            </button>
+          </article>
+        </div>
+      </div>
 
-<section id="contacto">
-  <h2>Não precisas de enfrentar isto sozinho</h2>
-  <p class="intro">O Novo Começo ainda está a preparar os seus canais próprios de apoio. Por enquanto, podes procurar orientação num serviço de saúde local. Se estiveres em perigo imediato ou pensares em magoar-te, procura ajuda de emergência e fica junto de alguém de confiança.</p>
-  <div class="notice">Este site é educativo e não substitui acompanhamento médico, psicológico, jurídico ou financeiro. Ainda não confirma consultas, reuniões ou atendimento próprio.</div>
-</section>
-</main>
+      <div class="faixa">
+        <h2>Não precisas de resolver tudo sozinho.</h2>
+        <p>Procurar ajuda é um passo de coragem, não de fraqueza.</p>
+      </div>
+    </section>
 
-<footer>
-  <div class="brand">NOVO <span>COMEÇO</span> 🌱</div>
-  <p>Recuperar vidas. Reconstruir futuros.</p>
-  <p>Plataforma de Educação, Prevenção e Apoio Social</p>
-  <p>Nampula, Moçambique · Iniciativa em desenvolvimento</p>
-  <p>© <span id="ano"></span> Novo Começo</p>
-</footer>
+    <!-- ETAPA 2: ESCOLHA -->
+    <section id="opcoes" class="pagina">
+      <div class="conteudo-pagina">
+        <button class="voltar" onclick="mostrar('inicio')">← Voltar ao início</button>
+        <h1>Por onde queres começar?</h1>
+        <p>Seleciona uma das opções para continuares.</p>
+        <div class="cartoes">
+          <article class="cartao">
+            <h3>Quero parar de apostar</h3>
+            <button class="link-botao" onclick="mostrar('parar')">Continuar →</button>
+          </article>
+          <article class="cartao">
+            <h3>Quero ajudar alguém</h3>
+            <button class="link-botao" onclick="mostrar('familia')">Continuar →</button>
+          </article>
+          <article class="cartao">
+            <h3>Quero aprender</h3>
+            <button class="link-botao" onclick="mostrar('riscos')">Continuar →</button>
+          </article>
+          <article class="cartao">
+            <h3>Conhecer o Novo Começo</h3>
+            <button class="link-botao" onclick="mostrar('projeto')">Continuar →</button>
+          </article>
+        </div>
+      </div>
+    </section>
 
-<script>
-document.getElementById("ano").textContent = new Date().getFullYear();
-document.getElementById("reflexaoForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-  const respostas = ["q1","q2","q3","q4","q5"].map(id => document.getElementById(id).value);
-  const sim = respostas.filter(r => r === "sim").length;
-  const resultado = document.getElementById("resultado");
-  resultado.style.display = "block";
-  if (sim === 0) {
-    resultado.textContent = "Obrigado pela reflexão. Continua atento aos teus hábitos e evita apostar dinheiro de que precisas.";
-  } else {
-    resultado.textContent = "As tuas respostas sugerem que vale a pena procurar apoio e rever os teus hábitos de aposta. Isto não é um diagnóstico. Fala com alguém de confiança e considera procurar um profissional de saúde. Não precisas de enfrentar isto sozinho.";
-  }
-});
-</script>
+    <!-- ETAPA 3: APOIO INDIVIDUAL -->
+    <section id="parar" class="pagina">
+      <div class="conteudo-pagina">
+        <button class="voltar" onclick="mostrar('inicio')">← Voltar ao início</button>
+        <h1>O teu novo começo pode ser hoje.</h1>
+        <p>Não precisas de recuperar o dinheiro perdido através de novas apostas.</p>
+
+        <div class="cartao">
+          <h2>Primeiros passos</h2>
+          <ol>
+            <li>Faz uma pausa nas apostas e evita tentar recuperar perdas.</li>
+            <li>Remove aplicações de apostas e desativa notificações promocionais.</li>
+            <li>Se for seguro para ti, pede a alguém de confiança que te ajude a proteger o dinheiro necessário para alimentação, casa e família.</li>
+            <li>Anota as dívidas e despesas essenciais, sem te julgares.</li>
+            <li>Procura apoio de um profissional de saúde ou serviço local qualificado se estiveres com dificuldade em parar.</li>
+          </ol>
+        </div>
+
+        <div class="aviso">
+          <strong>Importante:</strong> o Novo Começo é uma iniciativa educativa
+          em desenvolvimento. Esta página não substitui apoio profissional
+          e ainda não confirma consultas ou reuniões próprias.
+        </div>
+
+        <h2>Um passo de cada vez</h2>
+        <p>
+          Se voltares a apostar, isso não significa que não possas recomeçar.
+          Procura perceber o que desencadeou a situação e pede apoio.
+        </p>
+        <button class="botao dourado" onclick="mostrar('riscos')">
+          Aprender a reconhecer os riscos →
+        </button>
+      </div>
+    </section>
+
+    <!-- ETAPA 4: FAMÍLIA -->
+    <section id="familia" class="pagina">
+      <div class="conteudo-pagina">
+        <button class="voltar" onclick="mostrar('inicio')">← Voltar ao início</button>
+        <h1>Como ajudar alguém afetado pelas apostas</h1>
+        <p>O apoio começa com respeito, paciência e limites saudáveis.</p>
+
+        <div class="cartao">
+          <h2>O que podes fazer</h2>
+          <ul>
+            <li>Conversa num momento tranquilo, sem insultos nem ameaças.</li>
+            <li>Escuta a pessoa e deixa-a explicar o que está a viver.</li>
+            <li>Incentiva-a a procurar ajuda profissional quando necessário.</li>
+            <li>Ajuda a organizar despesas essenciais, respeitando a autonomia e a segurança de todos.</li>
+          </ul>
+        </div>
+
+        <div class="cartao">
+          <h2>O que deves evitar</h2>
+          <ul>
+            <li>Humilhar, expor publicamente ou chamar nomes à pessoa.</li>
+            <li>Emprestar dinheiro repetidamente para cobrir apostas ou novas perdas.</li>
+            <li>Prometer resultados garantidos ou tentar resolver tudo sozinho.</li>
+          </ul>
+        </div>
+
+        <div class="aviso">
+          Se houver ameaças, violência ou risco imediato de alguém se magoar,
+          procura ajuda de emergência local e protege a segurança de todos.
+        </div>
+      </div>
+    </section>
+
+    <!-- ETAPA 5: EDUCAÇÃO -->
+    <section id="riscos" class="pagina">
+      <div class="conteudo-pagina">
+        <button class="voltar" onclick="mostrar('inicio')">← Voltar ao início</button>
+        <h1>Compreender os riscos das apostas</h1>
+        <p>Conhecer os riscos pode ajudar-te a tomar decisões mais conscientes.</p>
+
+        <div class="cartao">
+          <h2>O dinheiro perdido não é garantido de volta</h2>
+          <p>
+            Tentar recuperar perdas com novas apostas pode aumentar os prejuízos.
+            Não existe uma estratégia que garanta lucro nas apostas.
+          </p>
+        </div>
+
+        <div class="cartao">
+          <h2>Sinais de alerta</h2>
+          <ul>
+            <li>Apostar dinheiro destinado a necessidades básicas.</li>
+            <li>Contrair dívidas para continuar a apostar.</li>
+            <li>Esconder apostas ou perdas da família.</li>
+            <li>Tentar parar repetidamente e não conseguir.</li>
+            <li>Sentir ansiedade ou conflitos por causa das apostas.</li>
+          </ul>
+          <p>Estes sinais não constituem um diagnóstico, mas podem indicar que é altura de procurar apoio.</p>
+        </div>
+
+        <button class="botao dourado" onclick="mostrar('parar')">
+          Ver os primeiros passos →
+        </button>
+      </div>
+    </section>
+
+    <!-- ETAPA 6: SOBRE O PROJETO -->
+    <section id="projeto" class="pagina">
+      <div class="conteudo-pagina">
+        <button class="voltar" onclick="mostrar('inicio')">← Voltar ao início</button>
+        <h1>Sobre o Novo Começo</h1>
+        <p><strong>Plataforma de Educação, Prevenção e Apoio Social.</strong></p>
+
+        <div class="cartao">
+          <h2>A nossa missão</h2>
+          <p>
+            Promover a educação sobre os riscos das apostas, incentivar a prevenção
+            e orientar pessoas e famílias afetadas para formas adequadas de apoio.
+          </p>
+        </div>
+
+        <div class="cartao">
+          <h2>A nossa visão</h2>
+          <p>
+            Contribuir para uma sociedade mais informada, onde as pessoas afetadas
+            pelas apostas encontrem respeito, orientação e esperança para reconstruir
+            as suas vidas.
+          </p>
+        </div>
+
+        <div class="cartao">
+          <h2>Os nossos objetivos</h2>
+          <ul>
+            <li>Partilhar informação educativa e preventiva.</li>
+            <li>Promover educação financeira e reconstrução de hábitos.</li>
+            <li>Orientar famílias e pessoas afetadas.</li>
+            <li>Desenvolver parcerias com serviços e profissionais qualificados.</li>
+          </ul>
+        </div>
+
+        <div class="aviso">
+          O projeto está em fase de desenvolvimento, com início previsto em
+          Nampula. Os serviços, contactos e parcerias serão divulgados quando
+          estiverem efetivamente confirmados.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="marca">NOVO <span>COMEÇO</span> 🌱</div>
+    <p>Recuperar vidas. Reconstruir futuros.</p>
+    <p>Educação · Prevenção · Apoio Social</p>
+    <p>Moçambique · Projeto em desenvolvimento</p>
+    <p>© <span id="ano"></span> Novo Começo</p>
+  </footer>
+
+  <script>
+    function mostrar(id) {
+      document.querySelectorAll('.pagina').forEach(function(pagina) {
+        pagina.classList.remove('ativa');
+      });
+
+      var escolhida = document.getElementById(id);
+
+      if (escolhida) {
+        escolhida.classList.add('ativa');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        history.replaceState(null, '', '#' + id);
+      }
+    }
+
+    document.getElementById('ano').textContent = new Date().getFullYear();
+
+    window.addEventListener('load', function() {
+      var id = window.location.hash.replace('#', '');
+      if (id && document.getElementById(id)) {
+        mostrar(id);
+      }
+    });
+  </script>
 </body>
 </html>
