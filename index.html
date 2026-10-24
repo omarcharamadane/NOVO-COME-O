@@ -1,668 +1,414 @@
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#075b43">
-<meta name="description" content="Novo Começo: informação, prevenção das apostas e apoio para reconstruir o futuro.">
-<title>Novo Começo | Recuperar vidas, reconstruir futuros</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#075844">
+<meta name="description" content="Novo Começo: prevenção das apostas, palestras educativas, motivação e escolhas responsáveis.">
+<title>Novo Começo | Recuperar vidas</title>
 <style>
 :root {
-  --verde: #075b43;
-  --verde-escuro: #043c2d;
-  --dourado: #e8b94f;
-  --claro: #f4f8f5;
-  --texto: #24352d;
-  --branco: #ffffff;
+  --green:#075844;
+  --dark:#043d30;
+  --gold:#edbd4d;
+  --light:#f3f8f5;
+  --text:#26372f;
+  --muted:#65746c;
+  --border:#dce8e1;
 }
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  scroll-behavior: smooth;
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--text);background:var(--light);line-height:1.7}
+button,a{font:inherit}
+a{text-decoration:none}
+header{background:var(--green);color:white;position:sticky;top:0;z-index:10;box-shadow:0 3px 15px #0002}
+.nav{max-width:1150px;margin:auto;padding:15px 20px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.logo{font-size:25px;font-weight:900;color:white;letter-spacing:-1px}
+.logo span{color:var(--gold)}
+.menu{display:flex;gap:15px;align-items:center}
+.menu a{color:white;font-size:14px;font-weight:bold}
+.menu a:hover{color:var(--gold)}
+.menu-btn{display:none;background:transparent;color:white;border:1px solid #ffffff80;border-radius:9px;padding:5px 12px;font-size:24px}
+.page{display:none}
+.page.active{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:.4;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.hero{background:radial-gradient(circle at top right,#0b7657,transparent 45%),linear-gradient(135deg,var(--dark),var(--green));color:white;text-align:center;padding:80px 20px 70px}
+.hero-inner{max-width:850px;margin:auto}
+.eyebrow{font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+h1{font-size:clamp(34px,6vw,57px);line-height:1.15;letter-spacing:-1px;margin:20px 0}
+.hero p{max-width:720px;margin:0 auto 25px;font-size:18px;color:#e4f0e9}
+.wrap{max-width:1120px;padding:48px 20px;margin:auto}
+.heading{text-align:center;margin-bottom:25px}
+h2{color:var(--dark);font-size:clamp(25px,4vw,35px);line-height:1.25;margin:0 0 10px}
+h3{color:var(--green);margin:8px 0}
+.muted{color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.card{background:white;border:1px solid var(--border);border-radius:16px;padding:23px;display:flex;flex-direction:column;align-items:flex-start;box-shadow:0 5px 18px #163c2810}
+.icon{font-size:27px;background:#e6f3eb;border-radius:12px;padding:7px 13px;margin-bottom:8px}
+.card p{color:var(--muted);font-size:15px;margin-top:0}
+.btn{display:inline-flex;justify-content:center;align-items:center;text-align:center;border:1px solid transparent;border-radius:10px;padding:12px 18px;font-weight:bold;cursor:pointer;transition:.2s}
+.btn:hover{transform:translateY(-2px)}
+.gold{background:var(--gold);color:var(--dark)}
+.green{background:var(--green);color:white}
+.outline{background:transparent;color:white;border-color:#ffffffa0}
+.soft{background:#e8f2eb;color:var(--green);border-color:var(--border)}
+.card .btn{width:100%;margin-top:auto}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:25px}
+.actions .btn{flex:1 1 180px}
+.hero .actions{justify-content:center}
+.hero .btn{min-width:230px}
+.content{max-width:850px;padding:45px 20px 65px;margin:auto}
+.panel{background:white;border:1px solid var(--border);border-radius:15px;padding:clamp(18px,4vw,30px);margin:20px 0}
+.panel li{margin:9px 0}
+.notice{padding:16px 18px;background:#fff7e5;border-left:5px solid var(--gold);border-radius:8px;margin:20px 0}
+.steps{list-style:none;padding:0;counter-reset:step}
+.steps li{counter-increment:step;position:relative;background:#eff6f1;border-radius:10px;padding:15px 15px 15px 54px;margin:12px 0}
+.steps li:before{content:counter(step);position:absolute;left:13px;top:15px;background:var(--green);color:white;border-radius:50%;width:28px;height:28px;display:grid;place-items:center;font-weight:bold}
+.band{background:#e5f1e9;text-align:center;padding:35px 20px}
+footer{background:#032f25;color:#e5f0e9;text-align:center;padding:32px 20px}
+footer p{font-size:14px;max-width:750px;margin:8px auto}
+footer .logo{display:block}
+footer .btn{margin-top:12px}
+@media(max-width:780px){
+ .menu-btn{display:block}
+ .menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--dark);padding:12px 20px;align-items:stretch;flex-direction:column;gap:0}
+ .menu.open{display:flex}
+ .menu a{padding:10px 0;border-bottom:1px solid #ffffff20}
+ .grid{grid-template-columns:1fr}
+ .hero{padding:60px 18px}
+ .wrap{padding:38px 16px}
+ .btn{width:100%}
+ .actions .btn{flex:1 1 100%}
 }
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  color: var(--texto);
-  background: var(--branco);
-  line-height: 1.7;
+@media(min-width:600px) and (max-width:900px){
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
-
-a {
-  text-decoration: none;
-}
-
-header {
-  background: var(--verde);
-  color: white;
-  padding: 14px 6%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  box-shadow: 0 3px 12px #0002;
-}
-
-.logo {
-  font-size: 23px;
-  font-weight: bold;
-  color: white;
-}
-
-.logo span {
-  color: var(--dourado);
-}
-
-nav {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-nav a {
-  color: white;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-nav a:hover {
-  color: var(--dourado);
-}
-
-.menu-btn {
-  display: none;
-  background: none;
-  border: 1px solid white;
-  color: white;
-  padding: 6px 11px;
-  font-size: 23px;
-  border-radius: 6px;
-}
-
-.hero {
-  background: linear-gradient(120deg, #043c2d, #087454);
-  color: white;
-  text-align: center;
-  padding: 95px 7%;
-}
-
-.hero .etiqueta {
-  color: var(--dourado);
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 13px;
-}
-
-.hero h1 {
-  font-size: clamp(34px, 6vw, 57px);
-  line-height: 1.2;
-  margin: 18px 0;
-}
-
-.hero p {
-  max-width: 700px;
-  margin: 0 auto 28px;
-  font-size: 18px;
-  color: #e6f2ec;
-}
-
-.btn {
-  display: inline-block;
-  background: var(--dourado);
-  color: #173323;
-  padding: 13px 23px;
-  border-radius: 7px;
-  font-weight: bold;
-  margin: 5px;
-  transition: 0.2s;
-}
-
-.btn:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.05);
-}
-
-.btn-outline {
-  background: transparent;
-  border: 1px solid white;
-  color: white;
-}
-
-section {
-  padding: 70px 7%;
-  scroll-margin-top: 75px;
-}
-
-section:nth-of-type(even) {
-  background: var(--claro);
-}
-
-.container {
-  max-width: 1100px;
-  margin: auto;
-}
-
-.section-title {
-  text-align: center;
-  margin-bottom: 35px;
-}
-
-.section-title h2 {
-  font-size: clamp(27px, 4vw, 37px);
-  color: var(--verde);
-  line-height: 1.3;
-  margin-bottom: 12px;
-}
-
-.section-title p {
-  max-width: 700px;
-  margin: auto;
-  color: #5d6d63;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 22px;
-}
-
-.card {
-  background: white;
-  padding: 25px;
-  border-radius: 12px;
-  border: 1px solid #e1e9e3;
-  box-shadow: 0 5px 18px #1733230b;
-}
-
-.card .icon {
-  font-size: 31px;
-  margin-bottom: 10px;
-}
-
-.card h3 {
-  color: var(--verde);
-  margin-bottom: 10px;
-  font-size: 20px;
-}
-
-.card p {
-  color: #536259;
-}
-
-.content {
-  max-width: 850px;
-  margin: auto;
-}
-
-.content h3 {
-  color: var(--verde);
-  margin: 22px 0 8px;
-}
-
-.content ul {
-  padding-left: 23px;
-  margin: 12px 0;
-}
-
-.content li {
-  margin-bottom: 8px;
-}
-
-.highlight {
-  background: #e8f3ec;
-  border-left: 5px solid var(--verde);
-  border-radius: 7px;
-  padding: 20px;
-  margin-top: 25px;
-}
-
-.steps {
-  counter-reset: passo;
-}
-
-.step {
-  position: relative;
-  padding: 18px 20px 18px 65px;
-  margin-bottom: 15px;
-  background: white;
-  border-radius: 10px;
-  border: 1px solid #e1e9e3;
-}
-
-.step::before {
-  counter-increment: passo;
-  content: counter(passo);
-  position: absolute;
-  left: 17px;
-  top: 20px;
-  background: var(--verde);
-  color: white;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  font-weight: bold;
-}
-
-.notice {
-  background: #fff6df;
-  border: 1px solid #f0d48b;
-  border-radius: 10px;
-  padding: 20px;
-  margin-top: 20px;
-}
-
-.contact-panel {
-  background: var(--verde);
-  color: white;
-  border-radius: 15px;
-  text-align: center;
-  padding: 38px 24px;
-}
-
-.contact-panel h2 {
-  font-size: 30px;
-  margin-bottom: 12px;
-}
-
-.contact-panel p {
-  max-width: 650px;
-  margin: 0 auto 20px;
-}
-
-.contact-panel .btn {
-  margin-top: 8px;
-}
-
-footer {
-  background: var(--verde-escuro);
-  color: #e5eee8;
-  padding: 35px 7%;
-  text-align: center;
-}
-
-footer strong {
-  color: var(--dourado);
-}
-
-footer p {
-  margin: 8px 0;
-  font-size: 14px;
-}
-
-@media (max-width: 850px) {
-  header {
-    padding: 13px 5%;
-  }
-
-  .menu-btn {
-    display: block;
-  }
-
-  nav {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--verde-escuro);
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    padding: 10px 5% 18px;
-  }
-
-  nav.aberto {
-    display: flex;
-  }
-
-  nav a {
-    padding: 12px 5px;
-    border-bottom: 1px solid #ffffff20;
-  }
-
-  .grid {
-    grid-template-columns: 1fr;
-  }
-
-  .hero {
-    padding: 70px 6%;
-  }
-
-  section {
-    padding: 55px 6%;
-  }
-}
-
-@media (min-width: 600px) and (max-width: 850px) {
-  .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+@media(prefers-reduced-motion:reduce){
+ *,*:before,*:after{animation:none!important;transition:none!important}
 }
 </style>
 </head>
-
 <body>
 
 <header>
-  <a href="#inicio" class="logo">NOVO <span>COMEÇO</span></a>
-
-  <button class="menu-btn" id="menuBtn"
-    aria-label="Abrir menu" aria-expanded="false"
-    aria-controls="menu">☰</button>
-
-  <nav id="menu">
-    <a href="#inicio">Início</a>
-    <a href="#sobre">Quem somos</a>
-    <a href="#aprender">Informação</a>
-    <a href="#passos">Primeiros passos</a>
-    <a href="#palestras">Palestras</a>
-    <a href="#apoio">Contactos</a>
-  </nav>
+  <div class="nav">
+    <a class="logo" href="#inicio" onclick="return go('inicio')">NOVO <span>COMEÇO</span></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false">☰</button>
+    <nav class="menu" id="menu">
+      <a href="#inicio" onclick="return go('inicio')">Início</a>
+      <a href="#sobre" onclick="return go('sobre')">O canal</a>
+      <a href="#prevencao" onclick="return go('prevencao')">Prevenção</a>
+      <a href="#palestras" onclick="return go('palestras')">Palestras</a>
+      <a href="#apoio" onclick="return go('apoio')">Orientação</a>
+      <a href="#regras" onclick="return go('regras')">Regras</a>
+    </nav>
+  </div>
 </header>
 
 <main>
-
-<section class="hero" id="inicio">
-  <div class="container">
-    <p class="etiqueta">Informação • Prevenção • Esperança</p>
-
-    <h1>Um novo começo é sempre possível.</h1>
-
-    <p>
-      As apostas podem trazer consequências para a vida, a família
-      e as finanças. Procurar informação e apoio é um passo importante
-      para recuperar o controlo e construir um futuro melhor.
-    </p>
-
-    <a href="#sobre" class="btn">Conhecer o projecto</a>
-    <a href="#passos" class="btn btn-outline">Quero dar o primeiro passo</a>
-  </div>
-</section>
-
-<section id="sobre">
-  <div class="container">
-    <div class="section-title">
-      <h2>Quem somos</h2>
-      <p>Conheça a iniciativa Novo Começo.</p>
-    </div>
-
-    <div class="content">
-      <p>
-        O <strong>Novo Começo</strong> é uma iniciativa de informação,
-        prevenção e sensibilização sobre os riscos associados às apostas.
-        O seu propósito é incentivar escolhas mais conscientes e apoiar
-        pessoas afectadas pelas apostas, assim como as suas famílias.
-      </p>
-
-      <h3>A nossa missão</h3>
-      <p>
-        Promover informação, prevenção e orientação para ajudar as pessoas
-        a reconhecer os riscos das apostas, procurar apoio adequado e
-        trabalhar na reconstrução dos seus projectos de vida.
-      </p>
-
-      <h3>A nossa visão</h3>
-      <p>
-        Uma comunidade mais informada, onde pedir ajuda seja visto como
-        um acto de coragem e onde cada pessoa tenha a oportunidade de
-        construir um futuro melhor.
-      </p>
-
-      <div class="highlight">
-        <strong>O nosso lema:</strong>
-        <p>Recuperar vidas. Reconstruir futuros.</p>
+<!-- INÍCIO -->
+<section class="page active" id="inicio">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">Informação · Prevenção · Esperança</div>
+      <h1>Um novo começo é sempre possível.</h1>
+      <p>Consciencializamos sobre os riscos das apostas, promovemos escolhas responsáveis e incentivamos cada pessoa a construir um futuro melhor.</p>
+      <div class="actions">
+        <button class="btn gold" onclick="go('sobre')">Conhecer o canal</button>
+        <button class="btn outline" onclick="go('apoio')">Quero dar o primeiro passo</button>
       </div>
     </div>
   </div>
-</section>
 
-<section id="aprender">
-  <div class="container">
-    <div class="section-title">
-      <h2>Compreender os riscos das apostas</h2>
-      <p>
-        Informação para reconhecer os sinais de alerta e tomar decisões
-        mais conscientes.
-      </p>
+  <div class="wrap">
+    <div class="heading">
+      <h2>Escolhe por onde começar</h2>
+      <p class="muted">Encontra informação, actividades e orientação numa só plataforma.</p>
     </div>
-
     <div class="grid">
-      <article class="card">
-        <div class="icon">🎯</div>
-        <h3>Como funcionam</h3>
-        <p>
-          As apostas envolvem riscos financeiros. Ganhar numa ocasião
-          não garante ganhos futuros, e tentar recuperar perdas pode
-          aumentar os prejuízos.
-        </p>
-      </article>
-
-      <article class="card">
-        <div class="icon">💰</div>
-        <h3>Consequências financeiras</h3>
-        <p>
-          Gastar dinheiro destinado à alimentação, renda, transporte,
-          estudos ou responsabilidades familiares pode comprometer
-          a estabilidade financeira.
-        </p>
-      </article>
-
-      <article class="card">
-        <div class="icon">❤️</div>
-        <h3>Impacto pessoal e familiar</h3>
-        <p>
-          As apostas podem provocar stress, conflitos, isolamento
-          e dificuldades nas relações. Conversar e procurar apoio
-          pode ser um passo importante.
-        </p>
-      </article>
-    </div>
-
-    <div class="content" style="margin-top:30px">
-      <h3>Sinais de alerta</h3>
-      <ul>
-        <li>Apostar mais dinheiro do que se tinha planeado.</li>
-        <li>Tentar recuperar dinheiro perdido fazendo novas apostas.</li>
-        <li>Esconder as apostas ou as perdas da família.</li>
-        <li>Pedir empréstimos para continuar a apostar.</li>
-        <li>Negligenciar o trabalho, os estudos ou outras responsabilidades.</li>
-      </ul>
-
-      <div class="highlight">
-        Reconhecer estes sinais não é motivo para vergonha.
-        É uma oportunidade para parar, reflectir e procurar ajuda.
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="passos">
-  <div class="container">
-    <div class="section-title">
-      <h2>Primeiros passos para mudar</h2>
-      <p>
-        Não precisas de resolver tudo num único dia. Começa com
-        pequenas decisões concretas.
-      </p>
-    </div>
-
-    <div class="content steps">
-      <div class="step">
-        <h3>Reconhece a situação</h3>
-        <p>
-          Observa quanto tempo e dinheiro estás a dedicar às apostas
-          e como isso afecta a tua vida.
-        </p>
-      </div>
-
-      <div class="step">
-        <h3>Interrompe o ciclo das perdas</h3>
-        <p>
-          Evita fazer novas apostas para recuperar dinheiro perdido.
-          Ganhos futuros não são garantidos.
-        </p>
-      </div>
-
-      <div class="step">
-        <h3>Protege o teu dinheiro</h3>
-        <p>
-          Dá prioridade às necessidades essenciais e organiza um
-          orçamento realista para as tuas despesas.
-        </p>
-      </div>
-
-      <div class="step">
-        <h3>Conversa com alguém de confiança</h3>
-        <p>
-          Partilhar o que está a acontecer pode ajudar-te a deixar
-          o isolamento e a encontrar apoio.
-        </p>
-      </div>
-
-      <div class="step">
-        <h3>Procura apoio adequado</h3>
-        <p>
-          Se sentes que não consegues controlar as apostas, procura
-          um profissional de saúde mental ou um serviço de saúde
-          disponível na tua comunidade.
-        </p>
-      </div>
-    </div>
-
-    <div class="notice">
-      <strong>Importante:</strong>
-      Se alguém próximo enfrenta este problema, evita humilhar,
-      ameaçar ou julgar. Conversa com respeito, estabelece limites
-      saudáveis e incentiva a procura de ajuda.
-    </div>
-  </div>
-</section>
-
-<section id="palestras">
-  <div class="container">
-    <div class="section-title">
-      <h2>Palestras e actividades</h2>
-      <p>
-        Informação e sensibilização para ajudar a comunidade a
-        compreender os riscos das apostas.
-      </p>
-    </div>
-
-    <div class="grid">
-      <article class="card">
-        <div class="icon">📚</div>
-        <h3>Educação e prevenção</h3>
-        <p>
-          Partilha de conhecimentos sobre os riscos das apostas
-          e a importância de decisões responsáveis.
-        </p>
-      </article>
-
-      <article class="card">
-        <div class="icon">🤝</div>
-        <h3>Apoio à comunidade</h3>
-        <p>
-          Incentivo ao diálogo, à partilha de experiências e à procura
-          de orientação adequada.
-        </p>
-      </article>
-
       <article class="card">
         <div class="icon">🌱</div>
-        <h3>Reconstrução financeira</h3>
-        <p>
-          Orientações educativas sobre orçamento, prioridades
-          financeiras e organização das despesas.
-        </p>
+        <h3>Sobre o Novo Começo</h3>
+        <p>Conhece a nossa missão, os nossos objectivos e o público que queremos apoiar.</p>
+        <button class="btn green" onclick="go('sobre')">Conhecer →</button>
+      </article>
+      <article class="card">
+        <div class="icon">📚</div>
+        <h3>Prevenção das apostas</h3>
+        <p>Aprende a reconhecer riscos e a tomar decisões mais conscientes.</p>
+        <button class="btn green" onclick="go('prevencao')">Ver informações →</button>
+      </article>
+      <article class="card">
+        <div class="icon">🧭</div>
+        <h3>Primeiro passo</h3>
+        <p>Descobre acções práticas para começar a recuperar o controlo da tua vida.</p>
+        <button class="btn green" onclick="go('passos')">Começar →</button>
+      </article>
+      <article class="card">
+        <div class="icon">🎤</div>
+        <h3>Palestras educativas</h3>
+        <p>Consulta os dias e horários das nossas sessões no WhatsApp.</p>
+        <button class="btn green" onclick="go('palestras')">Ver calendário →</button>
+      </article>
+      <article class="card">
+        <div class="icon">🤝</div>
+        <h3>Suporte e orientação</h3>
+        <p>Informação e orientação para jovens, famílias e pessoas afectadas pelas apostas.</p>
+        <button class="btn green" onclick="go('apoio')">Saber mais →</button>
+      </article>
+      <article class="card">
+        <div class="icon">📋</div>
+        <h3>Regras do canal</h3>
+        <p>Consulta as normas que ajudam a manter a comunidade respeitosa e segura.</p>
+        <button class="btn green" onclick="go('regras')">Ler regras →</button>
       </article>
     </div>
+  </div>
 
-    <div class="highlight content">
-      <h3>Calendário das palestras</h3>
-      <p>
-        <strong>Datas, horários e locais:</strong> a anunciar.
-      </p>
-      <p>
-        As informações serão publicadas nesta página depois de
-        confirmadas pela organização.
-      </p>
+  <div class="band">
+    <h2>Ninguém deve enfrentar este desafio sozinho.</h2>
+    <p>Partilha informação, participa nas actividades e ajuda a espalhar esperança.</p>
+    <div class="actions" style="justify-content:center">
+      <a class="btn green" href="https://whatsapp.com/channel/0029VbE4e434Y9lmZIuOL" target="_blank" rel="noopener noreferrer">Seguir canal no WhatsApp</a>
+      <a class="btn soft" href="https://www.youtube.com/@Novo-Comeco-m6u" target="_blank" rel="noopener noreferrer">Visitar YouTube</a>
     </div>
   </div>
 </section>
 
-<section id="apoio">
-  <div class="container">
-    <div class="contact-panel">
-      <h2>Não precisas de enfrentar tudo sozinho.</h2>
-
-      <p>
-        Se as apostas estão a afectar a tua vida ou a tua família,
-        o primeiro passo pode ser procurar informação e conversar
-        com alguém de confiança.
-      </p>
-
-      <p>
-        Os contactos oficiais do projecto e o link do grupo de
-        WhatsApp serão publicados aqui após confirmação.
-      </p>
-
-      <a href="#sobre" class="btn">Conhecer o Novo Começo</a>
+<!-- SOBRE -->
+<section class="page" id="sobre">
+  <div class="content">
+    <div class="eyebrow">Quem somos</div>
+    <h1>Sobre o Novo Começo</h1>
+    <div class="panel">
+      <h2>A nossa missão</h2>
+      <p>A nossa missão é consciencializar a sociedade sobre os riscos das apostas, promover escolhas responsáveis e ajudar as pessoas a recuperar o controlo das suas vidas.</p>
+      <p>Aqui encontrarás palestras educativas, informações de prevenção, conteúdos de consciencialização e mensagens de motivação para construir um futuro com mais oportunidades.</p>
+      <p>Acreditamos que ninguém deve enfrentar este desafio sozinho. Por isso, trabalhamos para promover a esperança, a mudança e novas oportunidades para todos.</p>
     </div>
-
-    <div class="content" style="margin-top:30px">
-      <h3>Onde estamos</h3>
-      <p>Província de Nampula, Moçambique.</p>
-
-      <h3>Contactos e grupo de WhatsApp</h3>
-      <p>
-        Informação de contacto, horários de atendimento e convite
-        para o grupo: por confirmar.
-      </p>
+    <div class="panel">
+      <h2>Para quem é o canal?</h2>
+      <ul>
+        <li>Jovens que procuram informação e prevenção.</li>
+        <li>Famílias preocupadas com as consequências das apostas.</li>
+        <li>Pessoas afectadas pelas apostas.</li>
+        <li>Todos os que desejam promover escolhas responsáveis.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h2>📍 Onde estamos</h2>
+      <p>Nampula, Moçambique.</p>
+      <p class="muted">O canal partilha conteúdos educativos e actividades online.</p>
+    </div>
+    <div class="actions">
+      <button class="btn soft" onclick="go('inicio')">← Início</button>
+      <button class="btn green" onclick="go('prevencao')">Continuar →</button>
     </div>
   </div>
 </section>
 
+<!-- PREVENÇÃO -->
+<section class="page" id="prevencao">
+  <div class="content">
+    <div class="eyebrow">Informação e consciencialização</div>
+    <h1>Prevenção dos riscos das apostas</h1>
+    <p>As apostas podem causar perdas financeiras e afectar as relações familiares, os estudos, o trabalho e o bem-estar. Para algumas pessoas, torna-se difícil parar.</p>
+    <div class="panel">
+      <h2>⚠️ Sinais de alerta</h2>
+      <ul>
+        <li>Usar dinheiro destinado às necessidades essenciais para apostar.</li>
+        <li>Tentar recuperar perdas fazendo novas apostas.</li>
+        <li>Esconder apostas ou dívidas da família.</li>
+        <li>Sentir dificuldade em parar, mesmo depois de decidir fazê-lo.</li>
+        <li>Pedir dinheiro emprestado repetidamente para continuar a apostar.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h2>💰 Protege o teu futuro</h2>
+      <ul>
+        <li>Prioriza alimentação, habitação, transporte e outras despesas essenciais.</li>
+        <li>Não uses empréstimos para apostar.</li>
+        <li>Não consideres as apostas uma fonte segura de rendimento.</li>
+        <li>Procura apoio se sentires que perdeste o controlo.</li>
+      </ul>
+    </div>
+    <div class="notice">Esta informação é educativa e não substitui aconselhamento profissional. Ter estes sinais não significa, por si só, que exista um diagnóstico.</div>
+    <div class="actions">
+      <button class="btn soft" onclick="go('inicio')">← Início</button>
+      <button class="btn green" onclick="go('passos')">Quero mudar →</button>
+    </div>
+  </div>
+</section>
+
+<!-- PRIMEIROS PASSOS -->
+<section class="page" id="passos">
+  <div class="content">
+    <div class="eyebrow">Esperança e mudança</div>
+    <h1>Como dar o primeiro passo</h1>
+    <p>Não precisas de resolver tudo de uma só vez. Uma pequena acção pode ajudar-te a começar.</p>
+    <div class="panel">
+      <ol class="steps">
+        <li><strong>Reconhece a situação.</strong><br>Pensa em como as apostas afectam o teu dinheiro, o teu tempo e as tuas relações.</li>
+        <li><strong>Protege o dinheiro essencial.</strong><br>Separa o dinheiro necessário para as despesas básicas.</li>
+        <li><strong>Reduz o acesso às apostas.</strong><br>Considera bloquear aplicações e sites de apostas e desactivar notificações promocionais.</li>
+        <li><strong>Conversa com alguém de confiança.</strong><br>Procura uma pessoa que te possa ouvir sem te humilhar.</li>
+        <li><strong>Procura ajuda adequada.</strong><br>Se não conseguires parar sozinho, procura um profissional de saúde ou um serviço de apoio disponível na tua região.</li>
+      </ol>
+    </div>
+    <div class="actions">
+      <button class="btn soft" onclick="go('prevencao')">← Voltar</button>
+      <button class="btn green" onclick="go('apoio')">Ver orientação →</button>
+    </div>
+  </div>
+</section>
+
+<!-- PALESTRAS -->
+<section class="page" id="palestras">
+  <div class="content">
+    <div class="eyebrow">Aprender em comunidade</div>
+    <h1>Palestras e actividades</h1>
+    <p>Promovemos sessões educativas e de consciencialização para partilhar informação, prevenir riscos e incentivar escolhas responsáveis.</p>
+    <div class="panel">
+      <h2>📅 Horário das palestras</h2>
+      <p><strong>Dias:</strong> todos os sábados e domingos.</p>
+      <p><strong>Horário:</strong> das 19h30 às 20h30.</p>
+      <p><strong>Local:</strong> página do Novo Começo no WhatsApp.</p>
+      <p>Participa nas sessões para aprender, reflectir e partilhar informação útil.</p>
+      <a class="btn green" href="https://whatsapp.com/channel/0029VbE4e434Y9lmZIuOL" target="_blank" rel="noopener noreferrer">Aceder ao canal WhatsApp →</a>
+    </div>
+    <div class="panel">
+      <h2>Temas das actividades</h2>
+      <ul>
+        <li>Prevenção dos riscos das apostas.</li>
+        <li>Educação financeira.</li>
+        <li>Impacto das apostas nas famílias.</li>
+        <li>Motivação, mudança e novas oportunidades.</li>
+      </ul>
+    </div>
+    <div class="actions">
+      <button class="btn soft" onclick="go('inicio')">← Início</button>
+      <a class="btn green" href="https://whatsapp.com/channel/0029VbE4e434Y9lmZIuOL" target="_blank" rel="noopener noreferrer">Seguir no WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- APOIO -->
+<section class="page" id="apoio">
+  <div class="content">
+    <div class="eyebrow">Não estás sozinho</div>
+    <h1>Suporte e orientação</h1>
+    <p>Oferecemos conteúdos de informação e sensibilização dirigidos a jovens e pessoas que enfrentam dificuldades relacionadas com as apostas, bem como às suas famílias.</p>
+    <div class="panel">
+      <h2>Como procurar apoio?</h2>
+      <ul>
+        <li>Conversa com alguém de confiança.</li>
+        <li>Participa nas actividades educativas do canal.</li>
+        <li>Procura um profissional de saúde ou aconselhamento qualificado quando necessário.</li>
+        <li>Protege as tuas necessidades essenciais e evita contrair novas dívidas para apostar.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h2>🕒 Horário de atendimento</h2>
+      <p><strong>De segunda a sexta-feira.</strong></p>
+      <p>O horário exacto e o contacto directo para atendimento serão anunciados quando estiverem confirmados.</p>
+    </div>
+    <div class="panel">
+      <h2>Encontra o Novo Começo</h2>
+      <p><strong>Localização:</strong> Nampula, Moçambique.</p>
+      <div class="actions">
+        <a class="btn green" href="https://whatsapp.com/channel/0029VbE4e434Y9lmZIuOL" target="_blank" rel="noopener noreferrer">Canal WhatsApp</a>
+        <a class="btn soft" href="https://www.youtube.com/@Novo-Comeco-m6u" target="_blank" rel="noopener noreferrer">Canal YouTube</a>
+      </div>
+    </div>
+    <div class="notice">O canal oferece informação e sensibilização. Não substitui acompanhamento médico, psicológico, jurídico ou financeiro especializado.</div>
+    <div class="actions">
+      <button class="btn soft" onclick="go('inicio')">← Início</button>
+      <button class="btn green" onclick="go('regras')">Consultar as regras →</button>
+    </div>
+  </div>
+</section>
+
+<!-- REGRAS -->
+<section class="page" id="regras">
+  <div class="content">
+    <div class="eyebrow">Respeito e responsabilidade</div>
+    <h1>Regras e normas do canal</h1>
+    <p>Para mantermos uma comunidade segura, respeitosa e organizada, pedimos a todos os participantes que cumpram estas normas.</p>
+    <div class="panel">
+      <h3>1. Respeito por todos</h3>
+      <p>Trata os outros com educação. Não são permitidos insultos, humilhações, ameaças ou discriminação.</p>
+      <h3>2. Não promover apostas</h3>
+      <p>Não publiques publicidade de casas de apostas, códigos promocionais ou conteúdos que incentivem outras pessoas a apostar.</p>
+      <h3>3. Conteúdo adequado</h3>
+      <p>Partilha conteúdos relacionados com prevenção, educação financeira, motivação e actividades do canal.</p>
+      <h3>4. Proteger a privacidade</h3>
+      <p>Não divulges informações pessoais, fotografias ou conversas privadas de outras pessoas sem autorização.</p>
+      <h3>5. Prevenir burlas</h3>
+      <p>Não são permitidos esquemas fraudulentos, falsas promessas de dinheiro ou links suspeitos.</p>
+      <h3>6. Participar com responsabilidade</h3>
+      <p>Evita spam, mensagens repetidas e interrupções durante as palestras.</p>
+      <h3>7. Discordar com respeito</h3>
+      <p>Podes discordar de uma opinião sem atacar, ameaçar ou perseguir outra pessoa.</p>
+      <h3>8. Apoiar sem julgar</h3>
+      <p>Não ridicularizes quem enfrenta dificuldades relacionadas com as apostas. Incentiva a procura de ajuda.</p>
+      <h3>9. Respeitar os limites do canal</h3>
+      <p>O conteúdo partilhado é educativo e não substitui acompanhamento profissional especializado.</p>
+      <h3>10. Consequências do incumprimento</h3>
+      <p>Conteúdos inadequados poderão ser removidos e participantes poderão ser advertidos ou restringidos em caso de violações graves ou repetidas, de acordo com as regras da plataforma.</p>
+    </div>
+    <div class="panel">
+      <h2>O nosso compromisso</h2>
+      <p>Queremos construir um espaço de aprendizagem, esperança e mudança positiva. Ao participar, compromete-te a respeitar estas normas e a dignidade de todos.</p>
+      <p><strong>🌱 Novo Começo — Recuperar vidas. Reconstruir futuros.</strong></p>
+    </div>
+    <div class="actions">
+      <button class="btn soft" onclick="go('inicio')">← Voltar ao início</button>
+      <a class="btn green" href="https://whatsapp.com/channel/0029VbE4e434Y9lmZIuOL" target="_blank" rel="noopener noreferrer">Visitar canal WhatsApp</a>
+    </div>
+  </div>
+</section>
 </main>
 
 <footer>
-  <p><strong>NOVO COMEÇO</strong></p>
-  <p>Recuperar vidas. Reconstruir futuros.</p>
-  <p>Informação, prevenção e sensibilização sobre os riscos das apostas.</p>
-  <p>© <span id="ano"></span> Novo Começo. Todos os direitos reservados.</p>
-  <p>
-    Este site tem finalidade educativa e informativa. Não substitui
-    aconselhamento clínico, psicológico, jurídico ou financeiro profissional.
-  </p>
+  <a class="logo" href="#inicio" onclick="return go('inicio')">NOVO <span>COMEÇO</span></a>
+  <p><strong>Recuperar vidas. Reconstruir futuros.</strong></p>
+  <p>Informação, prevenção, consciencialização e motivação.</p>
+  <p>Nampula, Moçambique.</p>
+  <p>© <span id="year"></span> Novo Começo. Conteúdo educativo.</p>
+  <button class="btn outline" onclick="go('inicio')">Voltar ao início ↑</button>
 </footer>
 
 <script>
-const menuBtn = document.getElementById("menuBtn");
-const menu = document.getElementById("menu");
+const pages = document.querySelectorAll('.page');
+const menu = document.getElementById('menu');
+const menuBtn = document.getElementById('menuBtn');
 
-menuBtn.addEventListener("click", function () {
-  const aberto = menu.classList.toggle("aberto");
-  menuBtn.setAttribute("aria-expanded", aberto);
-  menuBtn.textContent = aberto ? "✕" : "☰";
+function go(id) {
+  const target = document.getElementById(id);
+  if (!target || !target.classList.contains('page')) return false;
+
+  pages.forEach(page => page.classList.remove('active'));
+  target.classList.add('active');
+
+  menu.classList.remove('open');
+  menuBtn.setAttribute('aria-expanded', 'false');
+  menuBtn.setAttribute('aria-label', 'Abrir menu');
+
+  history.replaceState(null, '', '#' + id);
+  window.scrollTo({top:0, behavior:'smooth'});
+  return false;
+}
+
+menuBtn.addEventListener('click', () => {
+  const open = menu.classList.toggle('open');
+  menuBtn.setAttribute('aria-expanded', String(open));
+  menuBtn.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
 });
 
-document.querySelectorAll("#menu a").forEach(function (link) {
-  link.addEventListener("click", function () {
-    menu.classList.remove("aberto");
-    menuBtn.setAttribute("aria-expanded", "false");
-    menuBtn.textContent = "☰";
-  });
-});
+document.getElementById('year').textContent = new Date().getFullYear();
 
-document.getElementById("ano").textContent = new Date().getFullYear();
+const initial = location.hash.slice(1);
+if (initial) go(initial);
 </script>
-
 </body>
 </html>
